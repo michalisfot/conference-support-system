@@ -37,8 +37,14 @@
         </div>
         <div class="form-group">
             {!!Form::label('social', 'Add your social media');!!}
-            {!!Form::select('socialType', ['facebook' => 'Facebook','linkedin' => 'LinkedIn','twitter' => 'Twitter','instagram' => 'Instagram'], null, ['class' => 'form-control']);!!}
-            {!!Form::text('social', '', ['class' => 'form-control', 'placeholder' => 'Enter your profile link']);!!}
+            <div class="row">
+                <div class="col-md-6">
+                    {!!Form::select('socialType', ['facebook' => 'Facebook','linkedin' => 'LinkedIn','twitter' => 'Twitter','instagram' => 'Instagram'], null, ['class' => 'form-control']);!!}
+                </div>
+                <div class="col-md-6">
+                    {!!Form::text('social', '', ['class' => 'form-control', 'placeholder' => 'Enter your profile link']);!!}
+                </div>
+            </div>
          </div>
         <div>
             {{Form::submit('Update Profile', ['class'=>'btn btn-primary'])}}
