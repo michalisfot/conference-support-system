@@ -63,7 +63,7 @@ class MessagesController extends Controller
             return redirect('/')->with('fail', 'You are not logged in or you\'re not secretary');
         
         $id = $request->input('id');
-        $discussion = Discussion::find($id)->get()[0];
+        $discussion = Discussion::where('id',$id)->get()[0];
         $messages = User2discussion::where('discussionId', $id)->orderBy('timestamp')->get();
 
         foreach($messages as $message){
@@ -101,5 +101,30 @@ class MessagesController extends Controller
         
         // Redirect
         return redirect('/')->with('success', 'Reply Sent');
+    }
+
+    public function close(Request $request){
+        if(!session()->get('id') && session()->get('role')!='secretary')
+            return redirect('/')->with('fail', 'You are not logged in or you\'re not secretary');
+        
+        $id = $request->input('id');
+        
+        // Close the discussion
+        $discussion = Discussion::where('id',$id)->get()[0];
+        if($discussion->closed) {
+            $discussion->closed = 0;
+            // Save the changes
+            $discussion->save();
+        
+            // Redirect
+            return redirect('/discussion')->with('success', 'Discussion Opened');
+        }   else    {
+            $discussion->closed = 1;
+            // Save the changes
+            $discussion->save();
+            
+            // Redirect
+            return redirect('/discussion')->with('success', 'Discussion Closed');
+        }
     }
 }

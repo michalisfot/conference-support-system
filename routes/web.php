@@ -41,7 +41,7 @@ Route::get('/profile', 'ProfileController@getProfile');
 
 Route::post('/profile/update', 'ProfileController@updateProfile');
 
-Route::get('/closeDiscussion', 'MessagesController@close');
+Route::post('/closeDiscussion', 'MessagesController@close');
 
 Route::post('/reply', 'MessagesController@reply');
 

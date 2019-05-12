@@ -9,10 +9,24 @@
 @section('sidebar')
     @parent
     @if(count($announcements) > 0)
+        <div id="accordion">
         @foreach($announcements as $announcement)
-            <ul class="list-group">
-                <li class="list-group-item">{{$announcement->title}}<br><hr>{{$announcement->content}}</li>
-            </ul>
+            <div class="card">
+                <div class="card-header" id="heading{{$announcement->id}}">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapse{{$announcement->id}}" aria-expanded="true" aria-controls="collapse{{$announcement->id}}">
+                      {{$announcement->title}}
+                    </button>
+                  </h5>
+                </div>
+
+                <div id="collapse{{$announcement->id}}" class="collapse" aria-labelledby="heading{{$announcement->id}}" data-parent="#accordion">
+                  <div class="card-body">
+                    {{$announcement->content}}
+                  </div>
+                </div>
+            </div>
         @endforeach
+        </div>
     @endif
 @endsection

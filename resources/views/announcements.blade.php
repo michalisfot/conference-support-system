@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Contact</h1>
+    <h1>Ánnouncements</h1>
     {!! Form::open(['url' => 'announcements/submit']) !!}
         <div class="form-group">
             {!!Form::label('title', 'Title');!!}
